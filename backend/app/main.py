@@ -7,6 +7,8 @@ import app.db  # noqa: F401 — registra los modelos
 from app.core.config import settings
 from app.core.database import create_all_tables
 from app.modules.auth.router import router as auth_router
+from app.modules.categorias.router import router as categorias_router
+from app.modules.productos.router import router as productos_router
 from app.modules.usuarios.router import router as usuarios_router
 
 
@@ -16,11 +18,7 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(
-    title="Food Store API",
-    version="1.0.0",
-    lifespan=lifespan,
-)
+app = FastAPI(title="Food Store API", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -34,6 +32,8 @@ API_PREFIX = "/api/v1"
 
 app.include_router(auth_router, prefix=API_PREFIX)
 app.include_router(usuarios_router, prefix=API_PREFIX)
+app.include_router(categorias_router, prefix=API_PREFIX)
+app.include_router(productos_router, prefix=API_PREFIX)
 
 
 @app.get("/")
