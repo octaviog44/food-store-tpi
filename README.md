@@ -5,7 +5,7 @@ Sistema de pedidos de comida con backend **FastAPI + SQLModel + PostgreSQL** y f
 - **Materia:** Programación IV
 - **Entrega:** Trabajo Práctico Integrador (TPI)
 - **Repositorio:** https://github.com/octaviog44/food-store-tpi
-- **Video de demostración:** PEGAR_AQUI_URL_DEL_VIDEO
+- **Video de demostración:** https://drive.google.com/file/d/154NRJl6pDO9t2-U5J3gcx2cpexSf_v1a/view?usp=drive_link
 
 ---
 
@@ -271,7 +271,7 @@ Para crear un cliente de prueba, usar la pantalla `/register` del frontend.
 
 ## Video de demostración
 
-**URL:** PEGAR_AQUI_URL_DEL_VIDEO
+**URL:** https://drive.google.com/file/d/154NRJl6pDO9t2-U5J3gcx2cpexSf_v1a/view?usp=drive_link
 
 Duración: 10 a 15 minutos. Contenido del video:
 
