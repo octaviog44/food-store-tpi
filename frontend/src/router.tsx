@@ -9,6 +9,8 @@ import { MisPedidosPage } from "@/features/orders/MisPedidosPage";
 import { AdminLayout } from "@/features/admin/AdminLayout";
 import { DashboardPage } from "@/features/admin/DashboardPage";
 import { PedidosAdminPage } from "@/features/admin/PedidosAdminPage";
+import { CategoriasAdminPage } from "@/features/admin/categorias/CategoriasAdminPage";
+import { ProductosAdminPage } from "@/features/admin/productos/ProductosAdminPage";
 import { Layout } from "@/shared/components/Layout";
 
 function Placeholder({ label }: { label: string }) {
@@ -39,14 +41,8 @@ export const router = createBrowserRouter([
             children: [
               { index: true, element: <DashboardPage /> },
               { path: "pedidos", element: <PedidosAdminPage /> },
-              {
-                path: "productos",
-                element: <Placeholder label="Productos admin" />,
-              },
-              {
-                path: "categorias",
-                element: <Placeholder label="Categorías admin" />,
-              },
+              { path: "productos", element: <ProductosAdminPage /> },
+              { path: "categorias", element: <CategoriasAdminPage /> },
               {
                 path: "usuarios",
                 element: <Placeholder label="Usuarios admin" />,
