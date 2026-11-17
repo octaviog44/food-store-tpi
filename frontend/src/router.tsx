@@ -6,10 +6,13 @@ import { CatalogPage } from "@/features/catalog/CatalogPage";
 import { CartPage } from "@/features/cart/CartPage";
 import { CheckoutPage } from "@/features/cart/CheckoutPage";
 import { MisPedidosPage } from "@/features/orders/MisPedidosPage";
+import { AdminLayout } from "@/features/admin/AdminLayout";
+import { DashboardPage } from "@/features/admin/DashboardPage";
+import { PedidosAdminPage } from "@/features/admin/PedidosAdminPage";
 import { Layout } from "@/shared/components/Layout";
 
-function Admin() {
-  return <div className="text-gray-500">Panel admin (próximo paso)</div>;
+function Placeholder({ label }: { label: string }) {
+  return <div className="text-gray-500">{label} (próximo paso)</div>;
 }
 
 export const router = createBrowserRouter([
@@ -29,7 +32,28 @@ export const router = createBrowserRouter([
       },
       {
         element: <ProtectedRoute role="admin" />,
-        children: [{ path: "/admin", element: <Admin /> }],
+        children: [
+          {
+            path: "/admin",
+            element: <AdminLayout />,
+            children: [
+              { index: true, element: <DashboardPage /> },
+              { path: "pedidos", element: <PedidosAdminPage /> },
+              {
+                path: "productos",
+                element: <Placeholder label="Productos admin" />,
+              },
+              {
+                path: "categorias",
+                element: <Placeholder label="Categorías admin" />,
+              },
+              {
+                path: "usuarios",
+                element: <Placeholder label="Usuarios admin" />,
+              },
+            ],
+          },
+        ],
       },
     ],
   },
