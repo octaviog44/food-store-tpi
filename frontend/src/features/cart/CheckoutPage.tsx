@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -13,6 +13,7 @@ export function CheckoutPage() {
   const total = cartTotal(items);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const submittedRef = useRef(false);
 
   const form = useForm({
     defaultValues: {
@@ -33,9 +34,13 @@ export function CheckoutPage() {
             cantidad: i.cantidad,
           })),
         });
+        // Marcar como enviado ANTES de vaciar, para que el guard
+        // de "carrito vacío" no nos rebote a /carrito.
+        submittedRef.current = true;
         clear();
         queryClient.invalidateQueries({ queryKey: ["mis-pedidos"] });
-        navigate("/mis-pedidos");
+        queryClient.invalidateQueries({ queryKey: ["productos"] });
+        navigate("/mis-pedidos", { replace: true });
       } catch (err: unknown) {
         const e = err as {
           response?: { data?: { detail?: unknown } };
@@ -52,8 +57,10 @@ export function CheckoutPage() {
     },
   });
 
-  if (items.length === 0) {
-    navigate("/carrito");
+  // Guard: si entró directo a /checkout con carrito vacío (y no viene
+  // de haber confirmado), lo devolvemos al carrito.
+  if (items.length === 0 && !submittedRef.current) {
+    navigate("/carrito", { replace: true });
     return null;
   }
 
@@ -93,7 +100,7 @@ export function CheckoutPage() {
                     onBlur={field.handleBlur}
                     maxLength={200}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
-                    placeholder="Ej: Av. Siempreviva 742"
+                    placeholder="Ej: Av. Corrientes 1234"
                   />
                   {field.state.meta.errors.length > 0 && (
                     <p className="mt-1 text-sm text-red-600">
