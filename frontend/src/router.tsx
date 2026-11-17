@@ -3,14 +3,11 @@ import { Login } from "@/features/auth/Login";
 import { Register } from "@/features/auth/Register";
 import { ProtectedRoute } from "@/features/auth/ProtectedRoute";
 import { CatalogPage } from "@/features/catalog/CatalogPage";
+import { CartPage } from "@/features/cart/CartPage";
+import { CheckoutPage } from "@/features/cart/CheckoutPage";
+import { MisPedidosPage } from "@/features/orders/MisPedidosPage";
 import { Layout } from "@/shared/components/Layout";
 
-function Carrito() {
-  return <div className="text-gray-500">Carrito (próximo paso)</div>;
-}
-function MisPedidos() {
-  return <div className="text-gray-500">Mis pedidos (próximo paso)</div>;
-}
 function Admin() {
   return <div className="text-gray-500">Panel admin (próximo paso)</div>;
 }
@@ -22,10 +19,13 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <CatalogPage /> },
-      { path: "/carrito", element: <Carrito /> },
+      { path: "/carrito", element: <CartPage /> },
       {
         element: <ProtectedRoute />,
-        children: [{ path: "/mis-pedidos", element: <MisPedidos /> }],
+        children: [
+          { path: "/checkout", element: <CheckoutPage /> },
+          { path: "/mis-pedidos", element: <MisPedidosPage /> },
+        ],
       },
       {
         element: <ProtectedRoute role="admin" />,
