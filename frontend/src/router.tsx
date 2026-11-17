@@ -9,13 +9,10 @@ import { MisPedidosPage } from "@/features/orders/MisPedidosPage";
 import { AdminLayout } from "@/features/admin/AdminLayout";
 import { DashboardPage } from "@/features/admin/DashboardPage";
 import { PedidosAdminPage } from "@/features/admin/PedidosAdminPage";
+import { UsuariosAdminPage } from "@/features/admin/UsuariosAdminPage";
 import { CategoriasAdminPage } from "@/features/admin/categorias/CategoriasAdminPage";
 import { ProductosAdminPage } from "@/features/admin/productos/ProductosAdminPage";
 import { Layout } from "@/shared/components/Layout";
-
-function Placeholder({ label }: { label: string }) {
-  return <div className="text-gray-500">{label} (próximo paso)</div>;
-}
 
 export const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -43,10 +40,7 @@ export const router = createBrowserRouter([
               { path: "pedidos", element: <PedidosAdminPage /> },
               { path: "productos", element: <ProductosAdminPage /> },
               { path: "categorias", element: <CategoriasAdminPage /> },
-              {
-                path: "usuarios",
-                element: <Placeholder label="Usuarios admin" />,
-              },
+              { path: "usuarios", element: <UsuariosAdminPage /> },
             ],
           },
         ],
