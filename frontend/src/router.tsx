@@ -2,10 +2,11 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Login } from "@/features/auth/Login";
 import { Register } from "@/features/auth/Register";
 import { ProtectedRoute } from "@/features/auth/ProtectedRoute";
+import { CatalogPage } from "@/features/catalog/CatalogPage";
 import { Layout } from "@/shared/components/Layout";
 
-function Home() {
-  return <div className="text-gray-500">Catálogo (próximo paso)</div>;
+function Carrito() {
+  return <div className="text-gray-500">Carrito (próximo paso)</div>;
 }
 function MisPedidos() {
   return <div className="text-gray-500">Mis pedidos (próximo paso)</div>;
@@ -20,7 +21,8 @@ export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
-      { path: "/", element: <Home /> },
+      { path: "/", element: <CatalogPage /> },
+      { path: "/carrito", element: <Carrito /> },
       {
         element: <ProtectedRoute />,
         children: [{ path: "/mis-pedidos", element: <MisPedidos /> }],

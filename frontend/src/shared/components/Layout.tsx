@@ -1,9 +1,12 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/features/auth/store";
+import { useCartStore, cartCount } from "@/features/cart/store";
 
 export function Layout() {
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
+  const items = useCartStore((s) => s.items);
+  const count = cartCount(items);
 
   const handleLogout = async () => {
     await logout();
@@ -17,7 +20,7 @@ export function Layout() {
           <Link to="/" className="text-lg font-bold text-gray-900">
             🍔 Food Store
           </Link>
-          <nav className="flex items-center gap-4 text-sm">
+          <nav className="flex items-center gap-3 text-sm">
             <Link to="/" className="text-gray-700 hover:text-blue-600">
               Catálogo
             </Link>
@@ -30,10 +33,24 @@ export function Layout() {
               </Link>
             )}
             {user?.role === "admin" && (
-              <Link to="/admin" className="text-gray-700 hover:text-blue-600">
+              <Link
+                to="/admin"
+                className="text-gray-700 hover:text-blue-600"
+              >
                 Admin
               </Link>
             )}
+            <Link
+              to="/carrito"
+              className="relative rounded bg-gray-100 px-3 py-1 text-gray-700 hover:bg-gray-200"
+            >
+              🛒 Carrito
+              {count > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                  {count}
+                </span>
+              )}
+            </Link>
             {user ? (
               <div className="flex items-center gap-2">
                 <span className="text-gray-500">{user.username}</span>
